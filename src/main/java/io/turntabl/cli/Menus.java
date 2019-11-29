@@ -166,13 +166,34 @@ class Menus {
                     System.out.println("\033[1;31m Input not valid option!! \033[0m");
                 } else if (actualResponse == 1) {
                     Map<String, String> addedClientDetails = optionToAdd();
-                    clientController.addClient(addedClientDetails);
+                    Thread addClient = new Thread(() ->
+                    {
+                        try {
+                            Thread.sleep(3000);
+                            clientController.addClient(addedClientDetails);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    });
+
+                    addClient.start();
+                    addClient.join();
                     System.out.println();
                     mainMenu();
                 } else if (actualResponse == 2) {
                     System.out.println();
                     List<ClientTO> clientDetails = Arrays.asList(clientController.getAllClients());
-                    clientController.printFormat(clientDetails);
+                    Thread getClients = new Thread(() ->
+                    {
+                        try {
+                            Thread.sleep(3000);
+                            clientController.printFormat(clientDetails);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                    getClients.start();
+                    getClients.join();
                     mainMenu();
 
                 } else if (actualResponse == 3) {
@@ -183,7 +204,17 @@ class Menus {
                         System.out.println();
 
                     } else {
-                        clientController.printFormat(clientName);
+                        Thread getClientName = new Thread(() ->
+                        {
+                            try {
+                                Thread.sleep(3000);
+                                clientController.printFormat(clientName);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        });
+                        getClientName.start();
+                        getClientName.join();
                         optionToDeleteUpdate();
                          while (true) {
                                 System.out.println();
@@ -196,7 +227,17 @@ class Menus {
                                 int actualDeleteOption = Integer.parseInt(deleteOption);
                                 if (actualDeleteOption == 1) {
                                     String clientId = optionToEnterClientId();
-                                    clientController.deleteClient(Integer.parseInt(clientId));
+                                    Thread deleteClient = new Thread(() ->
+                                    {
+                                        try {
+                                            Thread.sleep(3000);
+                                            clientController.deleteClient(Integer.parseInt(clientId));
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                    });
+                                   deleteClient.start();
+                                   deleteClient.join();
                                     mainMenu();
                                     break;
                                 } else if (actualDeleteOption == 0) {
@@ -224,7 +265,18 @@ class Menus {
                                     mapOfNames.put("client_telephone", "");
                                     mapOfNames.put("client_email", "");
                                     mapOfNames.put("client_id", clientId);
-                                    clientController.updateClient(mapOfNames);
+                                    Thread updateClientName = new Thread(() ->
+                                    {
+                                        try {
+                                            Thread.sleep(3000);
+                                            clientController.updateClient(mapOfNames);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                    });
+                                    updateClientName.start();
+                                    updateClientName.join();
+
                                 } else if (updateOptionResponse1 == 2) {
                                     String newClientAddress = optionToChangeClientAddress();
                                     Map<String, String> mapOfNames = new HashMap<>();
@@ -233,7 +285,18 @@ class Menus {
                                     mapOfNames.put("client_telephone", "");
                                     mapOfNames.put("client_email", "");
                                     mapOfNames.put("client_id", clientId);
-                                    clientController.updateClient(mapOfNames);
+                                    Thread updateClientAddress = new Thread(() ->
+                                    {
+                                        try {
+                                            Thread.sleep(3000);
+                                            clientController.updateClient(mapOfNames);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                    });
+                                    updateClientAddress.start();
+                                    updateClientAddress.join();
+
                                 } else if (updateOptionResponse1 == 3) {
                                     String newClientTelephone = optionToChangeClientTelephone();
                                     Map<String, String> mapOfNames = new HashMap<>();
@@ -242,7 +305,18 @@ class Menus {
                                     mapOfNames.put("client_phoneNumber", newClientTelephone);
                                     mapOfNames.put("client_email", "");
                                     mapOfNames.put("client_id", clientId);
-                                    clientController.updateClient(mapOfNames);
+                                    Thread updateClientTel = new Thread(() ->
+                                    {
+                                        try {
+                                            Thread.sleep(3000);
+                                            clientController.updateClient(mapOfNames);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                    });
+                                    updateClientTel.start();
+                                    updateClientTel.join();
+
                                 } else if (updateOptionResponse1 == 4) {
                                     String newClientEmail = optionToChangeClientEmail();
                                     Map<String, String> mapOfNames = new HashMap<>();
@@ -251,7 +325,17 @@ class Menus {
                                     mapOfNames.put("client_telephone", "");
                                     mapOfNames.put("client_email", newClientEmail);
                                     mapOfNames.put("client_id", clientId);
-                                    clientController.updateClient(mapOfNames);
+                                    Thread updateClientEmail = new Thread(() ->
+                                    {
+                                        try {
+                                            Thread.sleep(3000);
+                                            clientController.updateClient(mapOfNames);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                    });
+                                   updateClientEmail.start();
+                                   updateClientEmail.join();
                                 }
                                 break;
 
@@ -278,7 +362,7 @@ class Menus {
 
 
             }
-            catch(NumberFormatException exception){
+            catch(NumberFormatException | InterruptedException exception){
                 System.out.println();
                 System.out.println("\033[1;31mInput not number\033[0m");
 

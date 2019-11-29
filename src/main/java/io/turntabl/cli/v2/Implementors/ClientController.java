@@ -24,7 +24,7 @@ public class ClientController {
 
 
     public void deleteClient(Integer clientID) {
-        final String uri = "https://customer-mgt-app.herokuapp.com/v1/api/client";
+        final String uri = "https://customer-mgt-app.herokuapp.com/v1/api/client/" + clientID;
         restTemplate.delete(uri);
         System.out.println("Client Deleted Successfully");
 
@@ -59,7 +59,6 @@ public class ClientController {
     public void updateClient(Map<String, String> requestData) {
         final String uri = "https://customer-mgt-app.herokuapp.com/v1/api/client";
         restTemplate.put(uri, requestData, ResponseEntity.class);
-        System.out.println("Client Added Successfully");
         System.out.println("Client Details Updated Successfully");
     }
 
