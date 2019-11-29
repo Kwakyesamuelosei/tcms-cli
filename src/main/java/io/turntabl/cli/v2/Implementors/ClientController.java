@@ -19,14 +19,15 @@ public class ClientController {
     public void addClient(Map<String,String> requestData) {
         final String uri = "https://customer-mgt-app.herokuapp.com/v1/api/client";
         restTemplate.postForObject(uri, requestData, ResponseEntity.class);
-        System.out.println("Client Added Successfully");
+        System.out.println("\033[0;92m Client Added Successfully \033[0m");
     }
 
 
     public void deleteClient(Integer clientID) {
+
         final String uri = "https://customer-mgt-app.herokuapp.com/v1/api/client/" + clientID;
         restTemplate.delete(uri);
-        System.out.println("Client Deleted Successfully");
+        System.out.println("\033[0;92m Client Deleted Successfully \033[0m");
 
     }
 
@@ -39,27 +40,15 @@ public class ClientController {
 
     public ClientTO[] searchClientByName(String name) {
         final String uri = "https://customer-mgt-app.herokuapp.com/v1/api/client/search/" + name;
-        HttpHeaders requestHeaders = new HttpHeaders();
-        requestHeaders.add("Accept", MediaType.APPLICATION_JSON_VALUE);
-
-        //request entity is created with request headers
-        HttpEntity<ClientTO[]> requestEntity = new HttpEntity<>(requestHeaders);
-        ResponseEntity<ClientTO[]> response = restTemplate. getForEntity(uri,ClientTO[].class);
-        ResponseEntity<ClientTO[]> responseEntity = restTemplate.exchange(
-                uri,
-                HttpMethod.GET,
-                requestEntity,
-                ClientTO[].class
-        );
-
-        ClientTO[] result = responseEntity.getBody();
+        ResponseEntity<ClientTO[]> response = restTemplate.getForEntity(uri, ClientTO[].class);
+        ClientTO[] result = response.getBody();
         return result;
     }
 
     public void updateClient(Map<String, String> requestData) {
         final String uri = "https://customer-mgt-app.herokuapp.com/v1/api/client";
         restTemplate.put(uri, requestData, ResponseEntity.class);
-        System.out.println("Client Details Updated Successfully");
+        System.out.println(" \033[0;92m Client Details Updated Successfully \033[0m");
     }
 
     public void printFormat(List<ClientTO> clientList){

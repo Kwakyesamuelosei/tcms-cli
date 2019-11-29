@@ -165,8 +165,10 @@ class Menus {
                 if (actualResponse < 1 || actualResponse > 4) {
                     System.out.println("\033[1;31m Input not valid option!! \033[0m");
                 } else if (actualResponse == 1) {
+                    System.out.println();
                     Map<String, String> addedClientDetails = optionToAdd();
                     Thread addClient = new Thread(() ->
+
                     {
                         try {
                             Thread.sleep(3000);
@@ -175,15 +177,15 @@ class Menus {
                             e.printStackTrace();
                         }
                     });
-
                     addClient.start();
                     addClient.join();
-                    System.out.println();
+
                     mainMenu();
                 } else if (actualResponse == 2) {
                     System.out.println();
                     List<ClientTO> clientDetails = Arrays.asList(clientController.getAllClients());
                     Thread getClients = new Thread(() ->
+
                     {
                         try {
                             Thread.sleep(3000);
@@ -196,6 +198,7 @@ class Menus {
                     getClients.join();
                     mainMenu();
 
+
                 } else if (actualResponse == 3) {
                     List<ClientTO> clientName = searchClient();
                     if (clientName.size() == 0) {
@@ -204,7 +207,8 @@ class Menus {
                         System.out.println();
 
                     } else {
-                        Thread getClientName = new Thread(() ->
+                        Thread searchClient = new Thread(() ->
+
                         {
                             try {
                                 Thread.sleep(3000);
@@ -213,8 +217,9 @@ class Menus {
                                 e.printStackTrace();
                             }
                         });
-                        getClientName.start();
-                        getClientName.join();
+                        searchClient.start();
+                        searchClient.join();
+
                         optionToDeleteUpdate();
                          while (true) {
                                 System.out.println();
@@ -227,7 +232,8 @@ class Menus {
                                 int actualDeleteOption = Integer.parseInt(deleteOption);
                                 if (actualDeleteOption == 1) {
                                     String clientId = optionToEnterClientId();
-                                    Thread deleteClient = new Thread(() ->
+                                    Thread updateClient = new Thread(() ->
+
                                     {
                                         try {
                                             Thread.sleep(3000);
@@ -236,8 +242,8 @@ class Menus {
                                             e.printStackTrace();
                                         }
                                     });
-                                   deleteClient.start();
-                                   deleteClient.join();
+                                   updateClient.start();
+                                   updateClient.join();
                                     mainMenu();
                                     break;
                                 } else if (actualDeleteOption == 0) {
@@ -255,7 +261,7 @@ class Menus {
                                 String clientId = optionToEnterClientId();
                                 optionToUpdateClient();
                                 String updateOptionResponse = scanner.nextLine();
-                                mainMenu();
+
                                 int updateOptionResponse1 = Integer.parseInt(updateOptionResponse);
                                 if (updateOptionResponse1 == 1) {
                                     String newClientName = optionToChangeClientName();
@@ -266,6 +272,7 @@ class Menus {
                                     mapOfNames.put("client_email", "");
                                     mapOfNames.put("client_id", clientId);
                                     Thread updateClientName = new Thread(() ->
+
                                     {
                                         try {
                                             Thread.sleep(3000);
@@ -286,6 +293,7 @@ class Menus {
                                     mapOfNames.put("client_email", "");
                                     mapOfNames.put("client_id", clientId);
                                     Thread updateClientAddress = new Thread(() ->
+
                                     {
                                         try {
                                             Thread.sleep(3000);
@@ -306,6 +314,7 @@ class Menus {
                                     mapOfNames.put("client_email", "");
                                     mapOfNames.put("client_id", clientId);
                                     Thread updateClientTel = new Thread(() ->
+
                                     {
                                         try {
                                             Thread.sleep(3000);
@@ -316,7 +325,6 @@ class Menus {
                                     });
                                     updateClientTel.start();
                                     updateClientTel.join();
-
                                 } else if (updateOptionResponse1 == 4) {
                                     String newClientEmail = optionToChangeClientEmail();
                                     Map<String, String> mapOfNames = new HashMap<>();
@@ -325,7 +333,8 @@ class Menus {
                                     mapOfNames.put("client_telephone", "");
                                     mapOfNames.put("client_email", newClientEmail);
                                     mapOfNames.put("client_id", clientId);
-                                    Thread updateClientEmail = new Thread(() ->
+                                    Thread updateClientMail = new Thread(() ->
+
                                     {
                                         try {
                                             Thread.sleep(3000);
@@ -334,9 +343,10 @@ class Menus {
                                             e.printStackTrace();
                                         }
                                     });
-                                   updateClientEmail.start();
-                                   updateClientEmail.join();
+                                    updateClientMail.start();
+                                    updateClientMail.join();
                                 }
+                                mainMenu();
                                 break;
 
                             } else if(actualUpdateOption == 3){
