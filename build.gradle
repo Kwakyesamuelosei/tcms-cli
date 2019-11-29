@@ -16,12 +16,12 @@ configurations {
 	}
 }
 
-run {
-    standardInput = System.in
-}
-
 repositories {
 	mavenCentral()
+}
+
+run{
+    standardInput = System.in
 }
 
 dependencies {
