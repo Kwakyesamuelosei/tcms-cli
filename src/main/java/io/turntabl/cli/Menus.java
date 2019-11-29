@@ -158,7 +158,7 @@ class Menus {
 
     public static void mainEntry() {
         mainMenu();
-        while (true){
+        while (scanner.hasNext()){
             String response = scanner.nextLine();
             try {
                 int actualResponse = Integer.parseInt(response);
