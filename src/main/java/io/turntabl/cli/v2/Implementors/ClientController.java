@@ -24,7 +24,8 @@ public class ClientController {
 
 
     public void deleteClient(Integer clientID) {
-
+        final String uri = "https://customer-mgt-app.herokuapp.com/v1/api/client";
+        restTemplate.delete(uri);
         System.out.println("Client Deleted Successfully");
 
     }
@@ -37,7 +38,7 @@ public class ClientController {
     }
 
     public ClientTO[] searchClientByName(String name) {
-        final String uri = "https://customer-mgt-app.herokuapp.com/v1/api/clients/search/" + name;
+        final String uri = "https://customer-mgt-app.herokuapp.com/v1/api/client/search/" + name;
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.add("Accept", MediaType.APPLICATION_JSON_VALUE);
 

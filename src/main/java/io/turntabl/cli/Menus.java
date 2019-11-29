@@ -165,16 +165,15 @@ class Menus {
                 if (actualResponse < 1 || actualResponse > 4) {
                     System.out.println("\033[1;31m Input not valid option!! \033[0m");
                 } else if (actualResponse == 1) {
-                    System.out.println();
                     Map<String, String> addedClientDetails = optionToAdd();
                     clientController.addClient(addedClientDetails);
-
+                    System.out.println();
                     mainMenu();
                 } else if (actualResponse == 2) {
-                    mainMenu();
                     System.out.println();
                     List<ClientTO> clientDetails = Arrays.asList(clientController.getAllClients());
                     clientController.printFormat(clientDetails);
+                    mainMenu();
 
                 } else if (actualResponse == 3) {
                     List<ClientTO> clientName = searchClient();
@@ -274,7 +273,7 @@ class Menus {
                 }
             }
                 else if(actualResponse == 4){
-                    break;
+                    System.exit(0);
                 }
 
 
