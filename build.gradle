@@ -16,6 +16,10 @@ configurations {
 	}
 }
 
+run {
+    standardInput = System.in
+}
+
 repositories {
 	mavenCentral()
 }
@@ -35,6 +39,4 @@ test {
 	useJUnitPlatform()
 }
 
-run{
-    standardInput = System.in
-}
+
